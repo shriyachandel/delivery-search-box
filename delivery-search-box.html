@@ -21,10 +21,31 @@ $(document).ready(function() {
 
     if (regex.test(postalCode)) {
       var fourthDigit = postalCode.charAt(3);
+      var fifthDigit = postalCode.charAt(4);
+      var sixthDigit = postalCode.charAt(5);
+      if(pin.length === 4){
+        if ($.isNumeric(fourthDigit)){
+        console.log(fourthDigit);
+        $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
+      }
+      else {
+        $('#message').html('');
+      }
+            } else {
+                $('#message').html('');
+            }
+      
+      if(isNaN(fifthDigit)){
+        $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
 
-      if ($.isNumeric(fourthDigit)) {
-        $('#message').html('Message: Fourth digit entered.');
-      } else {
+      }
+      else {
+        $('#message').html('');
+      }
+      if($.isNumeric(sixthDigit)){
+        $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
+      }
+      else {
         $('#message').html('');
       }
     }
