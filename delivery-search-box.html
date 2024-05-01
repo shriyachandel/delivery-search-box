@@ -24,12 +24,8 @@ $(document).ready(function() {
     var fifthDigit = postalCode.charAt(4);
     var sixthDigit = postalCode.charAt(5);
     
-    if ($.isNumeric(fourthDigit) && !isNaN(parseInt(fifthDigit)) && $.isNumeric(sixthDigit)) {
+    if ($.isNumeric(fourthDigit) && isNaN(parseInt(fifthDigit)) && $.isNumeric(sixthDigit)) {
       $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
-    } else if (!isNaN(parseInt(fifthDigit)) && isNaN(parseInt(sixthDigit))) {
-      $('#message').html('Message: Please enter a numeric value for the sixth digit.');
-    } else if (isNaN(parseInt(fifthDigit)) && !isNaN(parseInt(sixthDigit))) {
-      $('#message').html('Message: Please enter an alphabetic value for the fifth digit.');
     } else {
       $('#message').html('Wrong pin code');
     }
