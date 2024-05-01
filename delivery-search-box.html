@@ -17,14 +17,16 @@
 $(document).ready(function() {
   $('#postalCode').on('input', function() {
     var postalCode = $(this).val().toUpperCase();
-    var regex = /^(L6C|L3Z|M1|M2|M3|M4|M5|M6|M8|M9|L3P|L3R|L3S|L3T|L3X|L3Y|L4G|L4A|L4B|L4C|L4E|L4H|L4J|L4K|L4L|L4S|L6A|L6B|L6E|L6G|L7B)(\d)([A-Za-z])(\d)$/;
+    var regex = /^(L6C|L3Z|M1|M2|M3|M4|M5|M6|M8|M9|L3P|L3R|L3S|L3T|L3X|L3Y|L4G|L4A|L4B|L4C|L4E|L4H|L4J|L4K|L4L|L4S|L6A|L6B|L6E|L6G|L7B)(\d)([A-Za-z])(\d)?$/;
 
     if (regex.test(postalCode)) {
       $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
 
       // Extract the numeric value entered at the fourth position
       var fourthDigit = postalCode.charAt(3);
-      console.log("Fourth digit: " + fourthDigit);
+      if ($.isNumeric(fourthDigit)) {
+        console.log("Fourth digit: " + fourthDigit);
+      }
     } else {
       $('#message').html('');
     }
