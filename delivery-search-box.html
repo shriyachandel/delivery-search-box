@@ -19,18 +19,19 @@ $(document).ready(function() {
     var postalCode = $(this).val().toUpperCase();
     var regex = /^(L6C|L3Z|M1|M2|M3|M4|M5|M6|M8|M9|L3P|L3R|L3S|L3T|L3X|L3Y|L4G|L4A|L4B|L4C|L4E|L4H|L4J|L4K|L4L|L4S|L6A|L6B|L6E|L6G|L7B)(\d)([A-Za-z])(\d)?$/;
 
-    // Extract the numeric value entered at the fourth position
+    // Extract each digit of the postal code
     var fourthDigit = postalCode.charAt(3);
     var fifthDigit = postalCode.charAt(4);
-    var sixDigit = postalCode.charAt(5);
+    var sixthDigit = postalCode.charAt(5);
     
-    if ($.isNumeric(fourthDigit)) {
-      if (regex.test(postalCode)) {
-        $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
-        console.log("Fourth digit: " + fourthDigit);
-      } else {
-        $('#message').html('');
-      }
+    if ($.isNumeric(fourthDigit) && !isNaN(parseInt(fifthDigit)) && $.isNumeric(sixthDigit)) {
+      $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
+    } else if (!isNaN(parseInt(fifthDigit)) && isNaN(parseInt(sixthDigit))) {
+      $('#message').html('Message: Please enter a numeric value for the sixth digit.');
+    } else if (isNaN(parseInt(fifthDigit)) && !isNaN(parseInt(sixthDigit))) {
+      $('#message').html('Message: Please enter an alphabetic value for the fifth digit.');
+    } else {
+      $('#message').html('Wrong pin code');
     }
   });
 });
