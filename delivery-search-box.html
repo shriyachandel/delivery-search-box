@@ -21,8 +21,9 @@ $(document).ready(function() {
 
     // Extract the numeric value entered at the fourth position
     var fourthDigit = postalCode.charAt(3);
-    console.log(fourthDigit);
+    
     if ($.isNumeric(fourthDigit)) {
+      console.log(fourthDigit);
       if (regex.test(postalCode)) {
         $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
         console.log("Fourth digit: " + fourthDigit);
