@@ -24,7 +24,7 @@ $(document).ready(function() {
       var fifthDigit = postalCode.charAt(4);
       var sixthDigit = postalCode.charAt(5);
       
-      if ($.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit)) {
+      if ($.isNumeric(fourthDigit) && !isNaN(fifthDigit) && $.isNumeric(sixthDigit)) {
         $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
       } else {
         $('#message').html('');
