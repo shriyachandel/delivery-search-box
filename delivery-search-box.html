@@ -7,36 +7,30 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <div>
-      <label for="postalCode">Enter Postal Code:</label>
-      <input type="text" id="postalCode" maxlength="6">
+    <div class="delivery-box">
+        <div>
+         
+          <input type="text" id="postalCode" maxlength="6" placeholder="Enter Postal Code">
+        </div>
+        <div class="message_boxes">
+                <div id="message1">
+                    <P>Free Shipping and Frozen Product Delivery Available</P>
+                    <p>Free Shipping for orders over $45. For order below $45, a $9.99 flat fee will apply.</p>
+                </div>
+                <div id="message2">
+                    <P>Free Shipping Available</P>
+                    <p>Free Shipping for orders over $99. For order below $99, a $9.99 flat fee will apply.</p>
+                </div>
+                <div id="message3">
+                    <P>Free Shipping Available</P>
+                    <p>Free Shipping for orders over $150.</p>
+                </div>
+                <div id="message4">
+                    <P>You will be eligible for 50% off on the shipping fee if you spend over $99. Proceed to check out for shipping cost calculation.</P>
+                </div>
+        </div>
     </div>
-    <div id="message"></div>
 
-  <script>
-  <script>
-var modal = document.getElementById("cus_myModal");
-var btn = document.getElementById("cus_myBtn");
-var span = document.getElementsByClassName("cus_close")[0];
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-span.onclick = function() {
-  modal.style.display = "none";
-
-}
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-    
-  }
-}
-// $(".cus_close").click(function()
-//    {
-//     $(".cus_modal-content").hide();
-//       $('#postalCode').val('');
-//     });
-</script>
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
 $(document).ready(function() {
