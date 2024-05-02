@@ -1,60 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Postal Code Checker</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-  <div>
-    <label for="postalCode">Enter Postal Code:</label>
-    <input type="text" id="postalCode" maxlength="6">
-  </div>
-  <div id="message"></div>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postal Code Checker</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <label for="postalCode">Enter Postal Code:</label>
+      <input type="text" id="postalCode" maxlength="6">
+    </div>
+    <div id="message"></div>
 
+  <script>
+  <script>
+var modal = document.getElementById("cus_myModal");
+var btn = document.getElementById("cus_myBtn");
+var span = document.getElementsByClassName("cus_close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    
+  }
+}
+// $(".cus_close").click(function()
+//    {
+//     $(".cus_modal-content").hide();
+//       $('#postalCode').val('');
+//     });
+</script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
 $(document).ready(function() {
-  $('#postalCode').on('keyup', function(){
-    var postalCode = $(this).val().toUpperCase();
+   $('#postalCode').on('keypress', function(event){
+        // Get the pressed key
+        var keyPressed = String.fromCharCode(event.keyCode);
+        // Regular expression to match alphabetic and numeric characters
+        var validCharacters = /^[a-zA-Z0-9]+$/;
 
-    if(postalCode.length === 4){
-        console.log(postalCode);
-        if ($.isNumeric(fourthDigit)){
-        console.log(fourthDigit);
-        $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
-      }
-      else {
-        $('#message').html('');
-      }
-            } else {
-                $('#message').html('');
-            }
-
-    var regex = /^(L6C|L3Z|M1|M2|M3|M4|M5|M6|M8|M9|L3P|L3R|L3S|L3T|L3X|L3Y|L4G|L4A|L4B|L4C|L4E|L4H|L4J|L4K|L4L|L4S|L6A|L6B|L6E|L6G|L7B)(\d)([A-Za-z])(\d)$/;
-
-    if (regex.test(postalCode)) {
-      var fourthDigit = postalCode.charAt(3);
-      var fifthDigit = postalCode.charAt(4);
-      var sixthDigit = postalCode.charAt(5);
-     
-      
-      if(isNaN(fifthDigit)){
-        $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
-
-      }
-      else {
-        $('#message').html('');
-      }
-      if($.isNumeric(sixthDigit)){
-        $('#message').html('Message 1: Free Shipping and Frozen Product Delivery Available<br>Message 2: Free Shipping for orders over $45. For orders below $45, a $9.99 flat fee will apply.');
-      }
-      else {
-        $('#message').html('');
-      }
-    }
-  });
+        // Check if the pressed key is alphabetic or numeric
+        if (!validCharacters.test(keyPressed)) {
+            // Prevent the input of invalid characters
+            event.preventDefault();
+        }
+    });
+    $('#postalCode').on('keyup', function(){
+        // Remove non-alphabetic and non-numeric characters
+        var postalCode = $(this).val().toUpperCase().replace(/[^A-Z0-9]/g, '');
+        var postalCode2 = $(this).val().replace(/[^A-Z0-9]/g, '');
+        var thirdDigit = postalCode.charAt(2);
+        var fourthDigit = postalCode.charAt(3);
+        var fifthDigit = postalCode.charAt(4);
+        var sixthDigit = postalCode.charAt(5);
+        
+        // Checking for postal codes
+        if (postalCode.startsWith("L6C") || postalCode2.startsWith("L3z") || postalCode.startsWith("L3P") || postalCode.startsWith("L3R") || postalCode.startsWith("L3S") || postalCode.startsWith("L3T") || postalCode.startsWith("L3X") || postalCode.startsWith("L3Y") ||  postalCode.startsWith("L4G") || postalCode.startsWith("L4A") || postalCode.startsWith("L4B") || postalCode.startsWith("L4E") || postalCode.startsWith("L4H") || postalCode.startsWith("L4J") || postalCode.startsWith("L4K") || postalCode.startsWith("L4L") || postalCode.startsWith("L4S") || postalCode.startsWith("L6A") || postalCode.startsWith("L6B") || postalCode.startsWith("L6E") || postalCode.startsWith("L6G") || postalCode.startsWith("L7B") || postalCode.startsWith("M7Y")) {
+            $('#message1').toggle(postalCode.length === 6 && $.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit));
+        }
+        else if (postalCode.startsWith("M1") || postalCode.startsWith("M2") || postalCode.startsWith("M3") || postalCode.startsWith("M4") || postalCode.startsWith("M5") || postalCode.startsWith("M6") || postalCode.startsWith("M8") || postalCode.startsWith("M9")) {
+            $('#message1').toggle(postalCode.length === 6 && isNaN(thirdDigit) && $.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit));
+        }
+        else if (postalCode.startsWith("K1") || postalCode.startsWith("K2") || postalCode.startsWith("K6") || postalCode.startsWith("K7") || postalCode.startsWith("K8") || postalCode.startsWith("K9") || postalCode.startsWith("L0") || postalCode.startsWith("L1") || postalCode.startsWith("L2") || postalCode.startsWith("L5") || postalCode.startsWith("L7") || postalCode.startsWith("L8") || postalCode.startsWith("L9") || postalCode.startsWith("N1") || postalCode.startsWith("N2") || postalCode.startsWith("N3") || postalCode.startsWith("N4") || postalCode.startsWith("N5") || postalCode.startsWith("N6") || postalCode.startsWith("N7") || postalCode.startsWith("N8") || postalCode.startsWith("N9") || postalCode.startsWith("P1") || postalCode.startsWith("P4") || postalCode.startsWith("P6") || postalCode.startsWith("N9")) {
+            $('#message2').toggle(postalCode.length === 6 && isNaN(thirdDigit) && $.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit));
+        }
+        else if (postalCode.startsWith("L3B") || postalCode.startsWith("L3C") || postalCode.startsWith("L3L") || postalCode.startsWith("L4M") || postalCode.startsWith("L4N") || postalCode.startsWith("L4T") || postalCode.startsWith("L4V") || postalCode.startsWith("L4W") || postalCode.startsWith("L4X") || postalCode.startsWith("L4Y")  || postalCode.startsWith("L4Z") || postalCode.startsWith("L6H") || postalCode.startsWith("L6J") || postalCode.startsWith("L6K") || postalCode.startsWith("L6L") || postalCode.startsWith("L6M") || postalCode.startsWith("L6P") || postalCode.startsWith("L6R") || postalCode.startsWith("L6S") || postalCode.startsWith("L6T") || postalCode.startsWith("L6V") || postalCode.startsWith("L6W") || postalCode.startsWith("L6X") || postalCode.startsWith("L6Z") || postalCode.startsWith("P0C") || postalCode.startsWith("P0E") || postalCode.startsWith("P3B") || postalCode.startsWith("P3C") || postalCode.startsWith("P3E") || postalCode.startsWith("P3G") || postalCode.startsWith("P3N") || postalCode.startsWith("P7E") || postalCode.startsWith("P7K") || postalCode.startsWith("P7J")) {
+            $('#message2').toggle(postalCode.length === 6 && $.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit));
+        }
+        else if (postalCode.startsWith("G0A") || postalCode.startsWith("G0M") || postalCode.startsWith("G0P") || postalCode.startsWith("G0X") || postalCode.startsWith("G0Z")) {
+            $('#message3').toggle(postalCode.length === 6 && $.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit));
+        }
+        else if (postalCode.startsWith("G1") || postalCode.startsWith("G2") || postalCode.startsWith("G3") || postalCode.startsWith("G4") || postalCode.startsWith("G5") || postalCode.startsWith("G6") || postalCode.startsWith("G7") || postalCode.startsWith("G8") || postalCode.startsWith("G9") || postalCode.startsWith("H1") || postalCode.startsWith("H2") || postalCode.startsWith("H3") || postalCode.startsWith("H4") || postalCode.startsWith("H5") || postalCode.startsWith("H7") || postalCode.startsWith("H8") || postalCode.startsWith("H9") || postalCode.startsWith("J0") || postalCode.startsWith("J1") || postalCode.startsWith("J2") || postalCode.startsWith("J3") || postalCode.startsWith("J4") || postalCode.startsWith("J5") || postalCode.startsWith("J6") || postalCode.startsWith("J7") || postalCode.startsWith("J8") || postalCode.startsWith("J9")) {
+            $('#message3').toggle(postalCode.length === 6 && $.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit));
+        }
+        else if (postalCode.match(/^(G[1-9]|H[1-9]|J\d)/)) {
+            $('#message2').toggle(postalCode.length === 6 && isNaN(thirdDigit) && $.isNumeric(fourthDigit) && isNaN(fifthDigit) && $.isNumeric(sixthDigit));
+        }
+        else if (postalCode.length === 6) {
+            $('#message4').show();
+        }
+        // Default case
+        else {
+            $('#message1, #message2, #message3, #message4').hide();
+        }
+    });
 });
-</script>
-</body>
-</html>
+
+  </script>
+  </script>
+  </body>
+  </html>
